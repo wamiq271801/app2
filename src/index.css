@@ -8,8 +8,8 @@
 
 @layer base {
   :root {
-    /* Core Colors - Light, Professional, Educational */
-    --background: 220 13% 98%;
+    /* Core Colors - Clean, Modern, Professional */
+    --background: 240 20% 97%;
     --foreground: 220 13% 15%;
     
     --card: 0 0% 100%;
@@ -18,23 +18,23 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 13% 15%;
     
-    /* Primary - Teal/Emerald (Educational, Trustworthy) */
-    --primary: 174 62% 47%;
+    /* Primary - Blue (Professional) */
+    --primary: 217 91% 60%;
     --primary-foreground: 0 0% 100%;
-    --primary-hover: 174 62% 42%;
+    --primary-hover: 217 91% 55%;
     
-    /* Secondary - Soft Gray */
+    /* Secondary - Light Gray */
     --secondary: 220 13% 95%;
     --secondary-foreground: 220 13% 25%;
     
-    /* Muted - Light Gray Backgrounds */
-    --muted: 220 13% 96%;
+    /* Muted - Ultra Light Backgrounds */
+    --muted: 240 20% 97%;
     --muted-foreground: 220 9% 46%;
     
-    /* Accent - Warm Amber for Important Actions */
-    --accent: 38 92% 50%;
+    /* Accent - Bright Blue for CTAs */
+    --accent: 217 91% 60%;
     --accent-foreground: 0 0% 100%;
-    --accent-hover: 38 92% 45%;
+    --accent-hover: 217 91% 55%;
     
     /* Destructive - Soft Red */
     --destructive: 0 72% 51%;
@@ -44,28 +44,28 @@
     --success: 142 71% 45%;
     --success-foreground: 0 0% 100%;
     
-    /* Warning - Warm Orange */
+    /* Warning - Amber */
     --warning: 38 92% 50%;
     --warning-foreground: 0 0% 100%;
     
-    /* Info - Calm Blue */
+    /* Info - Light Blue */
     --info: 199 89% 48%;
     --info-foreground: 0 0% 100%;
     
     /* Borders and Inputs */
     --border: 220 13% 91%;
     --input: 220 13% 91%;
-    --ring: 174 62% 47%;
+    --ring: 217 91% 60%;
     
-    /* Sidebar */
-    --sidebar-background: 220 20% 18%;
-    --sidebar-foreground: 220 13% 95%;
-    --sidebar-primary: 174 62% 47%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 220 20% 24%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 220 20% 24%;
-    --sidebar-ring: 174 62% 47%;
+    /* Sidebar - Light Background */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 220 13% 25%;
+    --sidebar-primary: 217 91% 60%;
+    --sidebar-primary-foreground: 217 91% 60%;
+    --sidebar-accent: 217 91% 97%;
+    --sidebar-accent-foreground: 217 91% 60%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217 91% 60%;
     
     --radius: 0.75rem;
     

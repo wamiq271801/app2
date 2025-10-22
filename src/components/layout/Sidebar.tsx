@@ -23,10 +23,14 @@ export const Sidebar = () => {
   return (
     <aside className="w-64 bg-sidebar border-r border-sidebar-border min-h-screen flex flex-col">
       <div className="p-6 border-b border-sidebar-border">
-        <h1 className="text-xl font-bold text-sidebar-foreground flex items-center gap-2">
-          <GraduationCap className="h-6 w-6 text-sidebar-primary" />
-          School Admin
-        </h1>
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 rounded-xl bg-primary flex items-center justify-center">
+            <GraduationCap className="h-6 w-6 text-primary-foreground" />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold text-sidebar-foreground">School Admin</h1>
+          </div>
+        </div>
       </div>
       
       <nav className="flex-1 p-4 space-y-1">
@@ -35,24 +39,18 @@ export const Sidebar = () => {
             key={item.name}
             to={item.href}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-4 py-3 rounded-lg transition-all duration-200 ${
+              `flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 ${
                 isActive
-                  ? 'bg-sidebar-accent text-sidebar-accent-foreground shadow-sm'
+                  ? 'bg-sidebar-accent text-sidebar-accent-foreground font-medium'
                   : 'text-sidebar-foreground hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground'
               }`
             }
           >
             <item.icon className="h-5 w-5" />
-            <span className="font-medium">{item.name}</span>
+            <span>{item.name}</span>
           </NavLink>
         ))}
       </nav>
-      
-      <div className="p-4 border-t border-sidebar-border">
-        <p className="text-xs text-sidebar-foreground/60 text-center">
-          School Admin Dashboard v1.0
-        </p>
-      </div>
     </aside>
   );
 };

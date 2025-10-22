@@ -1,26 +1,18 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { PageHeader } from '@/components/common/PageHeader';
-import { StatusBadge } from '@/components/common/StatusBadge';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
+import { Plus } from 'lucide-react';
 import { Teacher } from '@/types';
 import { firestoreService } from '@/services/firestoreService';
 import { toast } from 'sonner';
+import { TeacherCard } from './TeacherCard';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export const TeachersPage = () => {
   const [teachers, setTeachers] = useState<Teacher[]>([]);
   const [loading, setLoading] = useState(true);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [departmentFilter, setDepartmentFilter] = useState('all');
 
   useEffect(() => {
     loadTeachers();
@@ -37,113 +29,56 @@ export const TeachersPage = () => {
     }
   };
 
-  const handleDelete = async (id: string) => {
-    if (!confirm('Are you sure you want to delete this teacher?')) return;
-    
-    try {
-      await firestoreService.delete('teachers', id);
-      toast.success('Teacher deleted successfully');
-      loadTeachers();
-    } catch (error) {
-      toast.error('Failed to delete teacher');
-    }
-  };
-
-  const filteredTeachers = teachers.filter(teacher =>
-    teacher.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    teacher.subject.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredTeachers = departmentFilter === 'all' 
+    ? teachers 
+    : teachers.filter(t => t.subject === departmentFilter);
 
   return (
     <div>
-      <PageHeader
-        title="Teachers"
-        description="Manage all teacher records"
-        action={
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-4xl font-bold">Teachers</h1>
+        <div className="flex items-center gap-4">
+          <Select value={departmentFilter} onValueChange={setDepartmentFilter}>
+            <SelectTrigger className="w-48">
+              <SelectValue placeholder="All Departments" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="all">All Departments</SelectItem>
+              <SelectItem value="Mathematics">Mathematics</SelectItem>
+              <SelectItem value="Science">Science</SelectItem>
+              <SelectItem value="English">English</SelectItem>
+              <SelectItem value="History">History</SelectItem>
+            </SelectContent>
+          </Select>
+          
           <Link to="/teachers/add">
             <Button>
               <Plus className="h-4 w-4 mr-2" />
               Add Teacher
             </Button>
           </Link>
-        }
-      />
-
-      <div className="mb-6">
-        <div className="relative max-w-md">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-          <Input
-            type="search"
-            placeholder="Search by name or subject..."
-            className="pl-10"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
         </div>
       </div>
 
-      <div className="table-responsive">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              <TableHead>Name</TableHead>
-              <TableHead>Subject</TableHead>
-              <TableHead>Phone</TableHead>
-              <TableHead>Email</TableHead>
-              <TableHead>Status</TableHead>
-              <TableHead className="text-right">Actions</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {loading ? (
-              <TableRow>
-                <TableCell colSpan={6} className="text-center py-8">
-                  Loading teachers...
-                </TableCell>
-              </TableRow>
-            ) : filteredTeachers.length === 0 ? (
-              <TableRow>
-                <TableCell colSpan={6} className="text-center py-8">
-                  No teachers found. Add your first teacher to get started.
-                </TableCell>
-              </TableRow>
-            ) : (
-              filteredTeachers.map((teacher) => (
-                <TableRow key={teacher.id} className="table-row-hover">
-                  <TableCell className="font-medium">{teacher.name}</TableCell>
-                  <TableCell>{teacher.subject}</TableCell>
-                  <TableCell>{teacher.phone}</TableCell>
-                  <TableCell>{teacher.email}</TableCell>
-                  <TableCell>
-                    <StatusBadge status={teacher.status} />
-                  </TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Link to={`/teachers/${teacher.id}`}>
-                        <Button variant="ghost" size="icon">
-                          <Eye className="h-4 w-4" />
-                        </Button>
-                      </Link>
-                      <Link to={`/teachers/${teacher.id}/edit`}>
-                        <Button variant="ghost" size="icon">
-                          <Edit className="h-4 w-4" />
-                        </Button>
-                      </Link>
-                      <Button
-                        variant="ghost"
-                        size="icon"
-                        onClick={() => handleDelete(teacher.id)}
-                      >
-                        <Trash2 className="h-4 w-4 text-destructive" />
-                      </Button>
-                    </div>
-                  </TableCell>
-                </TableRow>
-              ))
-            )}
-          </TableBody>
-        </Table>
-      </div>
+      {loading ? (
+        <div className="text-center py-12">Loading teachers...</div>
+      ) : filteredTeachers.length === 0 ? (
+        <div className="text-center py-12">
+          <p className="text-muted-foreground mb-4">No teachers found.</p>
+          <Link to="/teachers/add">
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Add Your First Teacher
+            </Button>
+          </Link>
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {filteredTeachers.map((teacher) => (
+            <TeacherCard key={teacher.id} teacher={teacher} />
+          ))}
+        </div>
+      )}
     </div>
   );
 };

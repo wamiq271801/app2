@@ -1,127 +1,183 @@
 import { PageHeader } from '@/components/common/PageHeader';
-import { StatCard } from '@/components/common/StatCard';
-import { GraduationCap, Users, UserCircle, School } from 'lucide-react';
+import { GraduationCap, Users, DollarSign, Calendar } from 'lucide-react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export const DashboardPage = () => {
-  // These would normally come from Firestore
   const stats = {
-    totalStudents: 1247,
-    totalTeachers: 85,
-    totalStaff: 32,
-    totalClasses: 42,
+    totalStudents: 1234,
+    totalTeachers: 56,
+    feeCollection: '$50,000',
+    upcomingEvents: 5,
   };
+
+  const notifications = [
+    { id: 1, type: 'success', message: 'Fee payment for John Doe is successful.', time: '2 min ago' },
+    { id: 2, type: 'warning', message: 'New student application requires approval.', time: '1 hour ago' },
+    { id: 3, type: 'info', message: 'Server maintenance scheduled for tomorrow.', time: '1 day ago' },
+  ];
+
+  const reminders = [
+    { id: 1, title: 'Staff Meeting', time: 'Today, 4:00 PM', icon: Calendar },
+    { id: 2, title: 'Parent-Teacher Conference', time: 'March 25, 2024', icon: Users },
+  ];
 
   return (
     <div>
-      <PageHeader 
-        title="Dashboard" 
-        description="Welcome back! Here's an overview of your school."
-      />
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <StatCard
-          title="Total Students"
-          value={stats.totalStudents}
-          icon={GraduationCap}
-          iconColor="text-primary"
-          trend={{ value: '+12 this month', positive: true }}
-        />
-        <StatCard
-          title="Total Teachers"
-          value={stats.totalTeachers}
-          icon={Users}
-          iconColor="text-accent"
-          trend={{ value: '+3 this month', positive: true }}
-        />
-        <StatCard
-          title="Total Staff"
-          value={stats.totalStaff}
-          icon={UserCircle}
-          iconColor="text-info"
-        />
-        <StatCard
-          title="Total Classes"
-          value={stats.totalClasses}
-          icon={School}
-          iconColor="text-success"
-        />
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2">Welcome back, Admin!</h1>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card>
-          <CardHeader>
-            <CardTitle>Recent Activity</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3 pb-3 border-b">
-                <div className="h-2 w-2 rounded-full bg-success mt-2"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">New student admission</p>
-                  <p className="text-xs text-muted-foreground">John Doe admitted to Class 10-A</p>
-                  <p className="text-xs text-muted-foreground mt-1">2 hours ago</p>
-                </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-blue-50 flex items-center justify-center">
+                <GraduationCap className="h-7 w-7 text-primary" />
               </div>
-              <div className="flex items-start gap-3 pb-3 border-b">
-                <div className="h-2 w-2 rounded-full bg-info mt-2"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Fee payment received</p>
-                  <p className="text-xs text-muted-foreground">Sarah Smith - $500 paid</p>
-                  <p className="text-xs text-muted-foreground mt-1">5 hours ago</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="h-2 w-2 rounded-full bg-warning mt-2"></div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Teacher assigned</p>
-                  <p className="text-xs text-muted-foreground">Mr. Johnson assigned to Mathematics</p>
-                  <p className="text-xs text-muted-foreground mt-1">1 day ago</p>
-                </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Total Students</p>
+                <p className="text-3xl font-bold">{stats.totalStudents}</p>
               </div>
             </div>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader>
-            <CardTitle>Upcoming Events</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              <div className="flex items-start gap-3 pb-3 border-b">
-                <div className="text-center">
-                  <div className="text-lg font-bold">15</div>
-                  <div className="text-xs text-muted-foreground">NOV</div>
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Parent-Teacher Meeting</p>
-                  <p className="text-xs text-muted-foreground">All classes - 3:00 PM</p>
-                </div>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-teal-50 flex items-center justify-center">
+                <Users className="h-7 w-7 text-teal-500" />
               </div>
-              <div className="flex items-start gap-3 pb-3 border-b">
-                <div className="text-center">
-                  <div className="text-lg font-bold">20</div>
-                  <div className="text-xs text-muted-foreground">NOV</div>
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Mid-term Examinations</p>
-                  <p className="text-xs text-muted-foreground">Classes 6-12</p>
-                </div>
-              </div>
-              <div className="flex items-start gap-3">
-                <div className="text-center">
-                  <div className="text-lg font-bold">25</div>
-                  <div className="text-xs text-muted-foreground">NOV</div>
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-medium">Annual Sports Day</p>
-                  <p className="text-xs text-muted-foreground">All students - Full day</p>
-                </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Total Teachers</p>
+                <p className="text-3xl font-bold">{stats.totalTeachers}</p>
               </div>
             </div>
           </CardContent>
         </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-green-50 flex items-center justify-center">
+                <DollarSign className="h-7 w-7 text-green-500" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Fee Collected</p>
+                <p className="text-3xl font-bold">{stats.feeCollection}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="hover:shadow-lg transition-shadow">
+          <CardContent className="p-6">
+            <div className="flex items-center gap-4">
+              <div className="h-14 w-14 rounded-2xl bg-purple-50 flex items-center justify-center">
+                <Calendar className="h-7 w-7 text-purple-500" />
+              </div>
+              <div>
+                <p className="text-sm text-muted-foreground mb-1">Upcoming Events</p>
+                <p className="text-3xl font-bold">{stats.upcomingEvents}</p>
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+      
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="lg:col-span-2 space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Monthly Fee Collection</CardTitle>
+              <p className="text-sm text-muted-foreground">This Year</p>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64 flex items-center justify-center text-muted-foreground">
+                <p>Chart visualization coming soon</p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Attendance Distribution</CardTitle>
+              <p className="text-sm text-muted-foreground">Today</p>
+            </CardHeader>
+            <CardContent>
+              <div className="h-64 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="text-6xl font-bold mb-2">95%</div>
+                  <p className="text-muted-foreground">Present</p>
+                  <div className="flex items-center justify-center gap-4 mt-4 text-sm">
+                    <div className="flex items-center gap-2">
+                      <div className="h-3 w-3 rounded-full bg-green-500"></div>
+                      <span>Present</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="h-3 w-3 rounded-full bg-red-500"></div>
+                      <span>Absent</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="h-3 w-3 rounded-full bg-yellow-500"></div>
+                      <span>On Leave</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle>Notifications</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {notifications.map((notif) => (
+                  <div key={notif.id} className="flex items-start gap-3">
+                    <div className={`h-10 w-10 rounded-full flex items-center justify-center flex-shrink-0 ${
+                      notif.type === 'success' ? 'bg-green-100' :
+                      notif.type === 'warning' ? 'bg-yellow-100' : 'bg-red-100'
+                    }`}>
+                      <div className={`h-2 w-2 rounded-full ${
+                        notif.type === 'success' ? 'bg-green-500' :
+                        notif.type === 'warning' ? 'bg-yellow-500' : 'bg-red-500'
+                      }`}></div>
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm">{notif.message}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{notif.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle>Reminders</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-4">
+                {reminders.map((reminder) => (
+                  <div key={reminder.id} className="flex items-start gap-3">
+                    <div className="h-10 w-10 rounded-xl bg-blue-50 flex items-center justify-center flex-shrink-0">
+                      <reminder.icon className="h-5 w-5 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium">{reminder.title}</p>
+                      <p className="text-xs text-muted-foreground mt-1">{reminder.time}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
