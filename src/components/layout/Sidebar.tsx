@@ -1,21 +1,29 @@
 import { NavLink } from 'react-router-dom';
-import { 
-  LayoutDashboard, 
-  GraduationCap, 
-  Users, 
-  UserCircle, 
-  ClipboardCheck, 
-  DollarSign, 
-  Settings 
+import {
+  LayoutDashboard,
+  GraduationCap,
+  Users,
+  UserCircle,
+  ClipboardCheck,
+  DollarSign,
+  BarChart3,
+  ClipboardList,
+  Activity,
+  Upload,
+  Settings
 } from 'lucide-react';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  { name: 'Analytics', href: '/analytics', icon: BarChart3 },
   { name: 'Students', href: '/students', icon: GraduationCap },
   { name: 'Teachers', href: '/teachers', icon: Users },
   { name: 'Staff', href: '/staff', icon: UserCircle },
   { name: 'Attendance', href: '/attendance', icon: ClipboardCheck },
+  { name: 'Exams', href: '/exams', icon: ClipboardList },
   { name: 'Fees', href: '/fees', icon: DollarSign },
+  { name: 'Activity Log', href: '/activity-log', icon: Activity },
+  { name: 'File Migration', href: '/file-migration', icon: Upload },
   { name: 'Settings', href: '/settings', icon: Settings },
 ];
 

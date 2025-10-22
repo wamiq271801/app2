@@ -23,6 +23,12 @@ import { FeesPage } from "./features/fees/FeesPage";
 import { SettingsPage } from "./features/settings/SettingsPage";
 import NotFound from "./pages/NotFound";
 
+import { AnalyticsDashboard } from "./features/analytics/AnalyticsDashboard";
+import { ExamsPage } from "./features/exams/ExamsPage";
+import { NotificationCenterPage } from "./features/notifications/NotificationCenter";
+import { ActivityLogPage } from "./features/activityLog/ActivityLogPage";
+import { FileMigrationTool } from "./features/files/FileMigrationTool";
+
 const queryClient = new QueryClient();
 
 const App = () => (
@@ -66,7 +72,22 @@ const App = () => (
               
               {/* Fees */}
               <Route path="fees" element={<FeesPage />} />
-              
+
+              {/* Analytics */}
+              <Route path="analytics" element={<AnalyticsDashboard />} />
+
+              {/* Exams */}
+              <Route path="exams" element={<ExamsPage />} />
+
+              {/* Notifications */}
+              <Route path="notifications" element={<NotificationCenterPage />} />
+
+              {/* Activity Log */}
+              <Route path="activity-log" element={<ActivityLogPage />} />
+
+              {/* File Migration */}
+              <Route path="file-migration" element={<FileMigrationTool />} />
+
               {/* Settings */}
               <Route path="settings" element={<SettingsPage />} />
             </Route>

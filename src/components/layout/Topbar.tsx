@@ -1,4 +1,4 @@
-import { Search, Bell, LogOut, User } from 'lucide-react';
+import { Search, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -10,6 +10,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { NotificationBell } from '@/features/notifications/NotificationCenter';
 
 export const Topbar = () => {
   const { user, logout } = useAuth();
@@ -28,11 +29,8 @@ export const Topbar = () => {
       </div>
       
       <div className="flex items-center gap-3">
-        <Button variant="ghost" size="icon" className="relative">
-          <Bell className="h-5 w-5" />
-          <span className="absolute top-1 right-1 h-2 w-2 bg-destructive rounded-full"></span>
-        </Button>
-        
+        <NotificationBell />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="ghost" size="icon" className="rounded-full">
